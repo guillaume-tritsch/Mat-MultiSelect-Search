@@ -1,0 +1,25 @@
+<mat-form-field appearance="outline">
+  <mat-label>Favorite food</mat-label>
+  <mat-select multiple [(value)]="selectedValue">
+    <mat-option class="filter-option" disabled style="padding: 5px;">
+      <div
+        style="display: grid; grid-template-rows: 1; grid-template-columns: auto auto;"
+      >
+        <mat-checkbox
+          #checkboxSelectAll
+          style="grid-column: 1"
+          (click)="toggleAll(checkboxSelectAll.checked)"
+          class="sellectAllCheckbox"
+        ></mat-checkbox>
+        <input class="dropdown-input" placeholder="Search..." />
+      </div>
+    </mat-option>
+    <mat-option
+      *ngFor="let option of options"
+      [value]="option.value"
+      (click)="setAllSelectedCheckboxStat()"
+    >
+      {{ option.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

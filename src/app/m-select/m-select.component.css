@@ -1,0 +1,15 @@
+.filter-option input {
+  border: none;
+  padding: 0.5em;
+  grid-column: 2;
+  width: 90%;
+  color: black;
+}
+
+.filter-option input:focus {
+  outline: none;
+}
+
+.filter-option {
+  border-bottom: 1px grey solid;
+}
