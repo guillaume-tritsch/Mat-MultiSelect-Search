@@ -1,9 +1,19 @@
-<mat-form-field appearance="outline">
+<mat-form-field appearance="fill">
   <mat-label>Favorite food</mat-label>
-  <mat-select multiple [(value)]="selectedValue">
-    <mat-option class="filter-option" disabled style="padding: 5px;">
+  <mat-select
+    disableRipple
+    multiple
+    (click)="removeSearchContent()"
+    [(value)]="selectedValue"
+  >
+    <mat-option
+      (click)="setSearchFocus()"
+      class="filter-option"
+      style="padding: 5px;"
+    >
       <div
-        style="display: grid; grid-template-rows: 1; grid-template-columns: auto auto;"
+        style="display: grid; grid-template-rows: 1; grid-template-columns: auto auto auto; align-items: center;
+        justify-items: center;"
       >
         <mat-checkbox
           #checkboxSelectAll
@@ -11,11 +21,30 @@
           (click)="toggleAll(checkboxSelectAll.checked)"
           class="sellectAllCheckbox"
         ></mat-checkbox>
-        <input class="dropdown-input" placeholder="Search..." />
+        <input
+          [(ngModel)]="searchContent"
+          #searchInput
+          class="dropdown-input"
+          (keydown)="$event.stopPropagation()"
+          placeholder="Search..."
+          (keyup)="filterOptions()"
+        />
+        <button (click)="removeSearchContent()" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
       </div>
     </mat-option>
     <mat-option
-      *ngFor="let option of options"
+      *ngFor="let option of filteredOptions"
+      [value]="option.value"
+      (click)="setAllSelectedCheckboxStat()"
+    >
+      {{ option.label }}
+    </mat-option>
+    <hr *ngIf="otherOptions.length != 0 && filteredOptions.length != 0" />
+    <mat-option
+      *ngFor="let option of otherOptions"
+      disabled
       [value]="option.value"
       (click)="setAllSelectedCheckboxStat()"
     >

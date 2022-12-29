@@ -13,15 +13,29 @@ import { Option } from './../option';
   styleUrls: ['./m-select.component.css'],
 })
 export class MSelectComponent implements OnInit {
-  @Input() options: Option[];
+  // ==== Parameters ==== //
+
+  @Input() options: Option[]; // options list
 
   @Input() ngModel: Option[] = [];
+
   @Output() ngModelChange: EventEmitter<Option[]> = new EventEmitter<
     Option[]
   >();
 
+  // ==== Public variables ==== //
   public selectedValue: any[] = [];
 
+  // Search systeme //
+  @ViewChild('searchInput') searchInput;
+
+  public searchContent: string = ''; // Content of search input
+
+  public filteredOptions: Option[] = [];
+
+  public otherOptions: Option[] = [];
+
+  // Checkbox systeme //
   @ViewChild('checkboxSelectAll') checkboxSelectAll;
 
   constructor() {}
@@ -29,6 +43,19 @@ export class MSelectComponent implements OnInit {
   ngOnInit() {
     this.selectedValue = this.ngModel;
     console.log(this.ngModel);
+
+    this.filteredOptions = this.options;
+  }
+
+  filterOptions() {
+    let filter = this.searchContent.toLowerCase();
+    this.filteredOptions = this.options.filter((option) =>
+      option['label'].toLowerCase().includes(filter)
+    );
+
+    this.otherOptions = this.options.filter(
+      (option) => !(this.filteredOptions.indexOf(option) !== -1)
+    );
   }
 
   toggleAll(isSelect: boolean) {
@@ -61,5 +88,14 @@ export class MSelectComponent implements OnInit {
 
   getValueArray(optionArray: Option[]) {
     return optionArray.map((a) => a.value);
+  }
+
+  setSearchFocus() {
+    this.searchInput.nativeElement.focus();
+  }
+
+  removeSearchContent() {
+    this.searchContent = '';
+    this.filterOptions();
   }
 }

@@ -6,6 +6,9 @@ import { MSelectComponent } from './m-select.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -13,6 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatFormFieldModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatIconModule,
+    MatButtonModule,
+    FormsModule,
   ],
   declarations: [MSelectComponent],
   exports: [MSelectComponent],
