@@ -44,7 +44,7 @@
       [disabled]="option.disabled"
       *ngFor="let option of filteredOptions"
       [value]="option.value"
-      (click)="onOptionClick()"
+      (click)="onOptionClick(option)"
     >
       {{ option.label }}
     </mat-option>
@@ -53,7 +53,7 @@
       *ngFor="let option of otherOptions"
       disabled
       [value]="option.value"
-      (click)="onOptionClick()"
+      (click)="onOptionClick(option)"
     >
       {{ option.label }}
     </mat-option>

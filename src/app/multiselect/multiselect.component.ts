@@ -54,9 +54,11 @@ export class MSelectComponent implements OnInit, AfterViewInit {
 
   // public method
 
-  public onOptionClick(): void {
-    this.setMainCheckboxStat();
-    this.valueChange();
+  public onOptionClick(element): void {
+    if (!element.disabled) {
+      this.setMainCheckboxStat();
+      this.valueChange();
+    }
   }
 
   public onResetButtonClick(): void {
@@ -92,7 +94,9 @@ export class MSelectComponent implements OnInit, AfterViewInit {
 
   public toggleAll(isSelect: boolean): void {
     if (isSelect) {
-      this.ngModel = this.getValueArray(this.options);
+      this.ngModel = this.getValueArray(
+        this.options.filter((m) => !m.disabled)
+      );
     } else {
       this.ngModel = [];
     }
@@ -101,7 +105,10 @@ export class MSelectComponent implements OnInit, AfterViewInit {
 
   private setMainCheckboxStat(): void {
     if (
-      this.ngModel.toString() === this.options.map((a) => a.value).toString()
+      this.options
+        .filter((m) => !m.disabled)
+        .map((a) => a.value)
+        .every((a) => this.ngModel.indexOf(a) !== -1)
     ) {
       this.checkboxSelectAll.indeterminate = false;
       this.checkboxSelectAll.checked = true;
