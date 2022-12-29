@@ -7,25 +7,27 @@ import { Option } from './option';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  name = 'Angular ' + VERSION.major;
-
   public value: Option[] = [
-    { label: 'France', value: '1' },
-    { label: 'Autriche', value: '2' },
-    { label: 'Allemagne', value: '3' },
-    { label: 'Angleterre', value: '4' },
-    { label: 'Etas Unis', value: '5' },
-    { label: 'Colombie', value: '6' },
-    { label: 'Chine', value: '15' },
-    { label: 'Russie', value: '25' },
-    { label: 'Pologne', value: '34' },
-    { label: 'Roumanie', value: '18' },
-    { label: 'Ukraine', value: '24' },
-    { label: 'Cuba', value: '33' },
-    { label: 'Espagne', value: '11' },
-    { label: 'Moldavie', value: '25' },
-    { label: 'Italie', value: '37' },
+    { label: 'France', value: 'france', disabled: true },
+    { label: 'Autriche', value: 'autriche', disabled: true },
+    { label: 'Allemagne', value: 'allemagne' },
+    { label: 'Angleterre', value: 'angleterre' },
+    { label: 'Etas Unis', value: 'etas unis' },
+    { label: 'Colombie', value: 'colombie' },
+    { label: 'Chine', value: 'chine' },
+    { label: 'Russie', value: 'russie' },
+    { label: 'Pologne', value: 'pologne' },
+    { label: 'Roumanie', value: 'roumanie' },
+    { label: 'Ukraine', value: 'ukraine' },
+    { label: 'Cuba', value: 'cuba' },
+    { label: 'Espagne', value: 'espagne' },
+    { label: 'Moldavie', value: 'moldavie' },
+    { label: 'Italie', value: 'italie' },
   ];
 
-  public selectedValue: Option[] = [];
+  public selectedValue: any[] = ['italie', 'moldavie'];
+
+  printInConsole() {
+    console.log(this.selectedValue);
+  }
 }

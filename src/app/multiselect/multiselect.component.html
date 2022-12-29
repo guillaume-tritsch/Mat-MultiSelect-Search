@@ -1,10 +1,12 @@
 <mat-form-field appearance="fill">
   <mat-label>Favorite food</mat-label>
   <mat-select
+    #selectElement
     disableRipple
     multiple
-    (click)="removeSearchContent()"
-    [(value)]="selectedValue"
+    (openedChange)="onOpenedChange()"
+    (click)="onResetButtonClick()"
+    [(value)]="ngModel"
   >
     <mat-option
       (click)="setSearchFocus()"
@@ -29,15 +31,20 @@
           placeholder="Search..."
           (keyup)="filterOptions()"
         />
-        <button (click)="removeSearchContent()" mat-icon-button>
+        <button
+          *ngIf="searchContent.length > 0"
+          (click)="onResetButtonClick()"
+          mat-icon-button
+        >
           <mat-icon>close</mat-icon>
         </button>
       </div>
     </mat-option>
     <mat-option
+      [disabled]="option.disabled"
       *ngFor="let option of filteredOptions"
       [value]="option.value"
-      (click)="setAllSelectedCheckboxStat()"
+      (click)="onOptionClick()"
     >
       {{ option.label }}
     </mat-option>
@@ -46,7 +53,7 @@
       *ngFor="let option of otherOptions"
       disabled
       [value]="option.value"
-      (click)="setAllSelectedCheckboxStat()"
+      (click)="onOptionClick()"
     >
       {{ option.label }}
     </mat-option>
