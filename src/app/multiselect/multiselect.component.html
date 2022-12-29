@@ -45,8 +45,15 @@
       *ngFor="let option of filteredOptions"
       [value]="option.value"
       (click)="onOptionClick(option)"
+      style="flex"
     >
       {{ option.label }}
+      <span
+        *ngIf="option.disabled"
+        style="right: 0px; color:red; font-size: 5px;"
+      >
+        disabled
+      </span>
     </mat-option>
     <hr *ngIf="otherOptions.length != 0 && filteredOptions.length != 0" />
     <mat-option
