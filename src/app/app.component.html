@@ -23,9 +23,17 @@
       <li *ngFor="let select of selectedValue">{{ select }}</li>
     </ul>
     <div>
-      <mat-checkbox [(ngModel)]="disabledA">disabled</mat-checkbox>
-
-      <mat-form-field class="example-form-field">
+      <ul>
+        <li>
+          <mat-checkbox [(ngModel)]="disabledA">disabled select</mat-checkbox>
+        </li>
+        <li>
+          <mat-checkbox [(ngModel)]="disabledFranceA" (click)="maj()">
+            disabled France
+          </mat-checkbox>
+        </li>
+      </ul>
+      <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Select placeholer</mat-label>
         <input matInput [(ngModel)]="placeholderA" />
       </mat-form-field>

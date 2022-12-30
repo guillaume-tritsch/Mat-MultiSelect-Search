@@ -7,8 +7,10 @@ import { Option } from './option';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  public disabledFranceA: boolean = false;
+
   public value: Option[] = [
-    { label: 'France', value: 'france', disabled: true },
+    { label: 'France', value: 'france', disabled: this.disabledFranceA },
     { label: 'Autriche', value: 'autriche', disabled: true },
     { label: 'Allemagne', value: 'allemagne' },
     { label: 'Angleterre', value: 'angleterre' },
@@ -30,6 +32,10 @@ export class AppComponent {
 
   public selectedValue: any[] = ['italie', 'moldavie'];
   public selectedValueB: string = 'italie';
+
+  public maj() {
+    this.value[0].disabled = this.disabledFranceA;
+  }
 
   printInConsole() {
     console.log(this.selectedValue);

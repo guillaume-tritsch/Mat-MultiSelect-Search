@@ -59,7 +59,10 @@ export class MSelectComponent implements OnInit, AfterViewInit {
   // public method
 
   public onOptionClick(element): void {
-    if (!element.disabled) {
+    if (
+      !element.disabled &&
+      this.everyValueAInB([element], this.filteredOptions)
+    ) {
       this.setMainCheckboxStat();
       this.valueChange();
     }
@@ -122,7 +125,7 @@ export class MSelectComponent implements OnInit, AfterViewInit {
       this.removeDisabledOptions(this.options)
     ); // value array of all enabled option in options array
 
-    if (this.compareTwoArray(selectableOptionValue, this.ngModel)) {
+    if (this.everyValueAInB(selectableOptionValue, this.ngModel)) {
       // Every option selected
       this.checkboxSelectAll.indeterminate = false;
       this.checkboxSelectAll.checked = true;
@@ -144,6 +147,7 @@ export class MSelectComponent implements OnInit, AfterViewInit {
   public removeSelectContent(): void {
     this.ngModel = [];
     this.setMainCheckboxStat();
+    this.valueChange();
   }
 
   // private
@@ -172,7 +176,8 @@ export class MSelectComponent implements OnInit, AfterViewInit {
   /*
    * Compare two array of value
    */
-  private compareTwoArray(arrayA: any[], arrayB: any[]): boolean {
+  private everyValueAInB(arrayA: any[], arrayB: any[]): boolean {
+    console.log(arrayA);
     return arrayA.every((a) => arrayB.indexOf(a) !== -1);
   }
 
