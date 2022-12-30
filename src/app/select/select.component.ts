@@ -50,7 +50,10 @@ export class SelectComponent implements OnInit {
   // public method
 
   public onOptionClick(element): void {
-    if (!element.disabled) {
+    if (
+      !element.disabled &&
+      this.everyValueAInB([element], this.filteredOptions)
+    ) {
       this.valueChange();
     }
   }
@@ -122,7 +125,7 @@ export class SelectComponent implements OnInit {
   /*
    * Compare two array of value
    */
-  private compareTwoArray(arrayA: any[], arrayB: any[]): boolean {
+  private everyValueAInB(arrayA: any[], arrayB: any[]): boolean {
     return arrayA.every((a) => arrayB.indexOf(a) !== -1);
   }
 

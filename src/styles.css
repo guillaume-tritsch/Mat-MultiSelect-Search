@@ -1,6 +1,6 @@
 /* Add application styles & imports to this file! */
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
-.filter-option > .mat-pseudo-checkbox:not(.sellectAllCheckbox) {
+.no-checkbox-option > .mat-pseudo-checkbox:not(.sellectAllCheckbox) {
   display: none !important;
 }
