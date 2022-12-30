@@ -9,40 +9,33 @@ import {
 } from '@angular/core';
 import { Option } from './../option';
 @Component({
-  selector: 'app-multiselect',
-  templateUrl: './multiselect.component.html',
-  styleUrls: ['./multiselect.component.css'],
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.css'],
 })
-export class MSelectComponent implements OnInit, AfterViewInit {
+export class SelectComponent implements OnInit {
   // ==== Parameters ==== //
 
   @Input() placeholder: string = '';
 
   @Input() options: Option[]; // options list
 
-  @Input() ngModel: string[] = [];
+  @Input() ngModel: string = '';
 
-  @Input() disabled: boolean = false;
-
-  @Output() ngModelChange: EventEmitter<string[]> = new EventEmitter<
-    string[]
-  >();
+  @Output() ngModelChange: EventEmitter<string> = new EventEmitter<string>();
 
   // ==== Public variables ==== //
 
   // Search systeme //
   @ViewChild('searchInput') searchInput;
 
+  @ViewChild('selectElement') selectElement;
+
   public searchContent: string = ''; // Content of search input
 
   public filteredOptions: Option[] = [];
 
   public otherOptions: Option[] = [];
-
-  // Checkbox systeme //
-  @ViewChild('checkboxSelectAll') checkboxSelectAll;
-
-  @ViewChild('selectElement') selectElement;
 
   constructor() {}
 
@@ -52,15 +45,12 @@ export class MSelectComponent implements OnInit, AfterViewInit {
     this.filterOptions();
   }
 
-  ngAfterViewInit() {
-    this.setMainCheckboxStat();
-  }
+  ngAfterViewInit() {}
 
   // public method
 
   public onOptionClick(element): void {
     if (!element.disabled) {
-      this.setMainCheckboxStat();
       this.valueChange();
     }
   }
@@ -102,48 +92,8 @@ export class MSelectComponent implements OnInit, AfterViewInit {
     this.otherOptions = this.sortObjectArray(this.otherOptions, 'label');
   }
 
-  /*
-   * Select or unselect all option.
-   */
-  public toggleAll(isSelect: boolean): void {
-    if (isSelect) {
-      let selectableOptionValue = this.getValueArray(
-        this.removeDisabledOptions(this.options)
-      );
-      this.ngModel = selectableOptionValue;
-    } else {
-      this.ngModel = [];
-    }
-    this.valueChange();
-  }
-
-  private setMainCheckboxStat(): void {
-    let selectableOptionValue: any[] = this.getValueArray(
-      this.removeDisabledOptions(this.options)
-    ); // value array of all enabled option in options array
-
-    if (this.compareTwoArray(selectableOptionValue, this.ngModel)) {
-      // Every option selected
-      this.checkboxSelectAll.indeterminate = false;
-      this.checkboxSelectAll.checked = true;
-    } else if (this.ngModel.length === 0) {
-      // No option selected
-      this.checkboxSelectAll.indeterminate = false;
-      this.checkboxSelectAll.checked = false;
-    } else {
-      // Indeterminate
-      this.checkboxSelectAll.indeterminate = true;
-      this.checkboxSelectAll.checked = false;
-    }
-  }
-
   public setSearchFocus(): void {
     this.searchInput.nativeElement.focus();
-  }
-
-  public removeSelectContent(): void {
-    this.ngModel = [];
-    this.setMainCheckboxStat();
   }
 
   // private

@@ -2,14 +2,48 @@
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
-<app-multiselect
-  ngDefaultControl
-  [(ngModel)]="selectedValue"
-  [options]="value"
-></app-multiselect>
-<ul>
-  <li *ngFor="let select of selectedValue">{{ select }}</li>
-</ul>
-<button (click)="printInConsole()" mat-raised-button color="primary">
-  print selectValue in console
-</button>
+<mat-card style="padding: 20px; ">
+  <h2>Multiselect</h2>
+  <section
+    style="display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; gap: 30px; "
+  >
+    <app-multiselect
+      ngDefaultControl
+      [(ngModel)]="selectedValue"
+      [options]="value"
+      style="auto-width"
+      [placeholder]="placeholderA"
+      [disabled]="disabledA"
+    ></app-multiselect>
+
+    <button (click)="printInConsole()" mat-raised-button color="primary">
+      print selectValue in console
+    </button>
+    <ul>
+      <li *ngFor="let select of selectedValue">{{ select }}</li>
+    </ul>
+    <div>
+      <mat-checkbox [(ngModel)]="disabledA">disabled</mat-checkbox>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>Select placeholer</mat-label>
+        <input matInput [(ngModel)]="placeholderA" />
+      </mat-form-field>
+    </div>
+  </section>
+  <h2>Simple select</h2>
+  <section
+    style="display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; gap: 30px; "
+  >
+    <app-select
+      ngDefaultControl
+      [(ngModel)]="selectedValueB"
+      [options]="value"
+    ></app-select>
+    <button (click)="printInConsole()" mat-raised-button color="primary">
+      print selectValue in console
+    </button>
+    <p>{{ selectedValueB }}</p>
+    <div></div>
+  </section>
+</mat-card>

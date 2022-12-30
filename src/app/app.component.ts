@@ -25,7 +25,11 @@ export class AppComponent {
     { label: 'Italie', value: 'italie' },
   ];
 
+  public placeholderA: string = 'Choisir un pays';
+  public disabledA: boolean = false;
+
   public selectedValue: any[] = ['italie', 'moldavie'];
+  public selectedValueB: string = 'italie';
 
   printInConsole() {
     console.log(this.selectedValue);

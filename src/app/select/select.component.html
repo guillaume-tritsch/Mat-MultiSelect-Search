@@ -2,11 +2,10 @@
   <mat-label>{{ placeholder }}</mat-label>
   <mat-select
     #selectElement
-    multiple
+    disableRipple
     (openedChange)="onOpenedChange()"
     (click)="onResetButtonClick()"
     [(value)]="ngModel"
-    [disabled]="disabled"
   >
     <mat-option
       (click)="setSearchFocus()"
@@ -15,14 +14,9 @@
     >
       <div
         style="display: grid; grid-template-rows: 1; grid-template-columns: auto auto auto; align-items: center;
-        justify-items: center;"
+      justify-items: center;"
+        (click)="$event.stopPropagation()"
       >
-        <mat-checkbox
-          #checkboxSelectAll
-          style="grid-column: 1"
-          (click)="toggleAll(checkboxSelectAll.checked)"
-          class="sellectAllCheckbox"
-        ></mat-checkbox>
         <input
           [(ngModel)]="searchContent"
           #searchInput
@@ -70,17 +64,4 @@
       </span>
     </mat-option>
   </mat-select>
-  <div matSuffix style="display: grid; grid-template-columns: auto auto;">
-    <button
-      [disabled]="disabled"
-      mat-icon-button
-      (click)="removeSelectContent(); $event.stopPropagation()"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-
-    <button [disabled]="disabled" mat-icon-button>
-      <mat-icon>expand_more</mat-icon>
-    </button>
-  </div>
 </mat-form-field>
